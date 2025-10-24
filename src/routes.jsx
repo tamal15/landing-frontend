@@ -3,49 +3,50 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import DashboardHome from "./Pages/Dashboard/DashboardHome/DashboardHome";
 
 
-
-// import ProjectHome from "./Pages/Dashboard/HomeDashboard/ProjectHome/ProjectHome";
-// import EditProjectHome from "./Pages/Dashboard/HomeDashboard/ProjectHome/EditProjectHome";
-
-
 import Login from "./Pages/Shared/Login/Login";
 // import PrivetRoute from "./Pages/Shared/PrivetRoute/PrivetRoute";
 
 import ErrorPage from "./Pages/Shared/Errorpage";
 import Layout from "./Layout";
-import FormPage from "./Pages/FormPage/FormPage";
-import Categoryspart from "./Pages/HomePage/CategoryPart/Categoryspart";
-import CategoryDetails from "./Pages/HomePage/CategoryPart/CategoryDetails";
 import Signup from "./Pages/Shared/Signup/Signup";
-import ViewChat from "./Pages/ChatPart/ViewChat/ViewChat";
 import Home from "./Pages/HomePage/Home/Home";
-import AccountDetails from "./Pages/AccountDetails/AccountDetails";
-import PostAdPage from "./Pages/AccountDetails/PostAdPage";
-import ContactUs from "./Pages/AccountDetails/ContactUs";
 import MakeAdmin from "./Pages/Dashboard/MakeAdmin/MakeAdmin";
 import UserAllData from "./Pages/Dashboard/UserAllData/UserAllData";
 import PendingProduct from "./Pages/Dashboard/PendingProduct/PendingProduct";
-import BoostAdPage from "./Pages/AccountDetails/AddsShow/BoostAdPage";
-import UpdatePackage from "./Pages/Dashboard/UpdatePackage/UpdatePackage";
-import LocationSelector from "./Pages/LocationSelector/LocationSelector";
-import AllAds from "./Pages/AllAds/AllAds";
 import BannerPost from "./Pages/Dashboard/BannerPost/BannerPost";
 import EditBanners from "./Pages/Dashboard/BannerPost/EditBanners";
-import SellFast from "./Pages/HomePage/SellFast/SellFast";
-import MemberShip from "./Pages/FormPage/MemberShip/MemberShip";
 import AllProductShow from "./Pages/Dashboard/AllProductShow/AllProductShow";
-import AboutWhy from "./Pages/HomePage/AboutWhy/AboutWhy";
-import Phone from "./Pages/HomePage/Phone/Phone";
-import EditProductCard from "./Pages/AccountDetails/AddsShow/EditProductCard";
-import AddsBanner from "./Pages/HomePage/AddsBanner/AddsBanner";
-import BoostAdds from "./Pages/HomePage/BoostAdds/BoostAdds";
-import AboutPart from "./Pages/HomePage/AboutPart/AboutPart";
-import TermCondition from "./Pages/HomePage/TermCondition/TermCondition";
-import PrivacyPolicy from "./Pages/HomePage/PrivacyPolicy/PrivacyPolicy";
-import PrivetRoute from "./Pages/Shared/PrivetRoute/PrivetRoute";
+// import PrivetRoute from "./Pages/Shared/PrivetRoute/PrivetRoute";
 import SubAdmin from "./Pages/Dashboard/MakeAdmin/SubAdmin/SubAdmin";
-import JobFormPage from "./Pages/FormPage/JobFormPage";
+import OrderReview from "./Pages/HomePage/LastCollection/OrderReview/OrderReview";
+import ProductDetails from "./Pages/HomePage/LastCollection/ProductDetails/ProductDetails";
+import Payment from "./Pages/HomePage/LastCollection/Payment/Payment";
+import ProductUpload from "./Pages/Dashboard/ProductUpload/ProductUpload";
+import SuccessPage from "./Pages/HomePage/LastCollection/SuccessPage/SuccessPage";
+import CategoryPage from "./Pages/HomePage/ProductShow/CategoryPage";
+import AllAds from "./Pages/HomePage/ProductShow/AllAds";
+import GetNavber from "./Pages/Dashboard/GetNavber/GetNavber";
+import EditNavber from "./Pages/Dashboard/GetNavber/EditNavber";
+import GetFooter from "./Pages/Dashboard/GetFooter/GetFooter";
+import EditFooter from "./Pages/Dashboard/GetFooter/EditFooter";
+import AboutPart from "./Pages/HomePage/AboutPart/AboutPart";
+import EditAbout from "./Pages/HomePage/AboutPart/EditAbout";
+import GetAbout from "./Pages/HomePage/AboutPart/GetAbout";
+import Contactdata from "./Pages/HomePage/Contact/Contactdata";
+import BlogPage from "./Pages/HomePage/BlogPage/Blogpage";
+import GetBlog from "./Pages/HomePage/BlogPage/GetBlog";
+import EditBlog from "./Pages/HomePage/BlogPage/EditBlog";
+import Offerpage from "./Pages/HomePage/Offerpage/Offerpage";
+import UploadOffer from "./Pages/HomePage/Offerpage/UploadOffer";
+import GetOffer from "./Pages/HomePage/Offerpage/GetOffer";
+import EditOffer from "./Pages/HomePage/Offerpage/EditOffer";
+import GetProduct from "./Pages/Dashboard/ProductUpload/GetProduct";
+import EditProduct from "./Pages/Dashboard/ProductUpload/EditProduct";
+import UpdateOrder from "./Pages/Dashboard/UpdateOrder/UpdateOrder";
 import PrivateRoute from "./Pages/Shared/PrivetRoute/PrivetRoute";
+import AllUserOrder from "./Pages/Dashboard/UpdateOrder/AllUserOrder";
+import ApprovedOrder from "./Pages/Dashboard/UpdateOrder/ApprovedOrder";
+// import PrivateRoute from "./Pages/Shared/PrivetRoute/PrivetRoute";
 
 
 const router = createBrowserRouter([
@@ -62,120 +63,67 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      {
-        path: "/uploadcategory",
-        element: 
-        <PrivetRoute>
-         <FormPage />
-        </PrivetRoute>
-        
-      },
-      {
-        path: "/accounts",
-        element: 
-        // <PrivetRoute>
-          <AccountDetails />
-        // </PrivetRoute>
-       
-      },
-      {
-        path:"/boost-ad/:productId",
-        element: <BoostAdPage />,
-      },
-      {
-        path:"/editproductcard/:id",
-        element: <EditProductCard />,
-      },
-      {
-        path: "/contactus",
-        element: <ContactUs />,
-      },
-      // {
-      //   path: "/banneradds",
-      //   element: <Bannerads />,
-      // },
-      {
-        path: "/postadpages",
-        element: 
-        <PrivateRoute>
-         <PostAdPage />
-        </PrivateRoute>
-        
-      },
-      {
-        path: "/allads",
-        element: <AllAds />,
-      },
-      {
-        path: "/addsbanners",
-        element: <AddsBanner />,
-      },
-      {
-        path: "/aboutsparts",
-        element: <AboutPart />,
-      },
-      {
-        path: "/postjobpage",
-        element: <JobFormPage />,
-      },
-      {
-        path: "/termcondition",
-        element: <TermCondition />,
-      },
-      {
-        path: "/privacypolicy",
-        element: <PrivacyPolicy />,
-      },
-      {
-        path: "/boostadds",
-        element: <BoostAdds />,
-      },
+      
+     
+     
+     
+   
+    
       {
         path: "/pendingproduct",
         element: <PendingProduct />,
       },
       
      
+      
       {
-        path: "/categoryspart",
-        element: <Categoryspart />,
+        path: "/payment",
+        element: <Payment />,
       },
       {
-        path: "/viewchats",
-        element: 
-        // <PrivetRoute>
-          <ViewChat />
-        // </PrivetRoute>
-       
-      },
-      {
-        path: "/location",
-        element: <LocationSelector />,
-      },
-      {
-        path: "/sellfast",
-        element: <SellFast />,
-      },
-      {
-        path: "/membership",
-        element: <MemberShip />,
-      },
-      {
-        path: "/phone",
-        element: <Phone />,
-      },
-      {
-        path: "/aboutwhy",
-        element: <AboutWhy />,
+        path: "/aboutpart",
+        element: <AboutPart />,
       },
       // {
-      //   path: "/category/:catego",
-      //   element: <Categorynewpart />,
+      //   path: "/productupload",
+      //   element: <ProductUpload />,
       // },
       
       {
-        path: "/category/:category",
-        element: <CategoryDetails />,
+        path: "/success",
+        element: <SuccessPage />,
+      },
+      {
+        path: "/OrderReview",
+        element: <OrderReview />,
+      },
+      {
+        path: "/allads",
+        element: <AllAds />,
+      },
+      {
+        path: "/contactdata",
+        element: <Contactdata />,
+      },
+      {
+        path: "/blog",
+        element: 
+        <BlogPage />,
+      },
+      {
+        path: "/offer",
+        element: <Offerpage />,
+      },
+      {
+        path:"bookDetails/:id",
+        element: <ProductDetails />,
+      },
+   
+     
+      
+      {
+        path: "/category/:categoryName",
+        element: <CategoryPage />,
       },
      
 
@@ -196,14 +144,18 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: (
-          // <PrivetRoute>
+          <PrivateRoute>
             <Dashboard />
-          // </PrivetRoute>
+           </PrivateRoute>
         ),
         children: [
           {
             path: "/dashboard",
-            element: <DashboardHome />,
+            element: 
+            <PrivateRoute>
+              <DashboardHome />
+            </PrivateRoute>
+         
           },
           {
             path: "/dashboard/makeadmin",
@@ -222,20 +174,84 @@ const router = createBrowserRouter([
             element: <PendingProduct />,
           },
           {
+            path: "/dashboard/getblog",
+            element: <GetBlog />,
+          },
+          {
+            path: "/dashboard/updateorder",
+            element: <UpdateOrder />,
+          },
+          {
+            path: "/dashboard/approvedorders",
+            element: <ApprovedOrder />,
+          },
+          {
+            path: "/dashboard/AllUserorder",
+            element: <AllUserOrder />,
+          },
+          {
             path: "/dashboard/allproductshows",
             element: <AllProductShow />,
           },
           {
-            path: "/dashboard/updatepackage",
-            element: <UpdatePackage />,
+            path: "/dashboard/showproducts",
+            element: <GetProduct />,
+          },
+          {
+            path: "/dashboard/productupload",
+            element: <ProductUpload />,
+          },
+          {
+            path: "/dashboard/uploadoffer",
+            element: <UploadOffer />,
+          },
+          {
+            path: "/dashboard/showdataoffer",
+            element: <GetOffer />,
+          },
+          {
+            path: "/dashboard/getFooter",
+            element: <GetFooter />,
+          },
+          {
+            path: "/dashboard/getnavber",
+            element: <GetNavber />,
           },
           {
             path: "/dashboard/bannerpost",
             element: <BannerPost />,
           },
           {
+            path: "/dashboard/getabout",
+            element: <GetAbout />,
+          },
+          {
             path: "/dashboard/editbanners/:id",
             element: <EditBanners/>,
+          },
+          {
+            path: "/dashboard/editnavber/:id",
+            element: <EditNavber/>,
+          },
+          {
+            path: "/dashboard/editfooter/:id",
+            element: <EditFooter/>,
+          },
+          {
+            path: "/dashboard/editabout/:id",
+            element: <EditAbout/>,
+          },
+          {
+            path: "/dashboard/editblog/:id",
+            element: <EditBlog/>,
+          },
+          {
+            path: "/dashboard/editoffer/:id",
+            element: <EditOffer/>,
+          },
+          {
+            path: "/dashboard/editproductdatas/:id",
+            element: <EditProduct/>,
           },
          
     

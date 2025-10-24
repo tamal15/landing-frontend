@@ -75,10 +75,10 @@ const resources = {
       bikesGuide: "Package Guide",
       propertyGuide: "Account Guide",
       officialBlog: "Official Blog",
-      downloadOurApp: "Download Our App",
-      googlePlay: "Google Play",
-      appStore: "App Store",
-      otherCountries: "Other Countries",
+      downloadOurApp: "Service SellFlit",
+      googlePlay: "Post Free Ad",
+      appStore: "Account Details",
+      otherCountries: "Category Service",
       Bangladesh: "Bangladesh",
       allRightsReserved: "All rights reserved",
 
@@ -90,6 +90,28 @@ const resources = {
       favourite: "Favourite",
       settings: "Settings",
       phoneNumber: "Phone number",
+
+      welcomeMessage: "Welcome SellFlit! Let's post an ad.",
+chooseOption: "Choose any option below",
+
+sellSomethings: "Sell something",
+sellItemCategoryService: "Sell an item, Category or service",
+
+offerCategoryService: "Offer a Category for Service",
+
+postJobVacancy: "Post a job vacancy",
+postJobBangladesh: "Post a job in Bangladesh",
+postJobSellFlit: "Post a job on SellFlit",
+
+lookForSomething: "Look for something",
+lookForPropertyRent: "Look for property to rent",
+lookForSomethingBuy: "Look for something to buy",
+
+postingAllowance: "Know your posting allowance  ",
+postingAllowance2: "See our posting rules  ",
+
+
+
 
 
       youHaveNoAds: "You don’t have any ads yet.",
@@ -125,7 +147,7 @@ const resources = {
         account: "অ্যাকাউন্ট",
         allAds: "সমস্ত বিজ্ঞাপন",
         postFreeAd: "ফ্রি বিজ্ঞাপন দিন",
-        communitySuccess: "#১ কমিউনিটি-সমর্থিত পণ্য সাফল্য",
+        communitySuccess: "#১ সবকিছু খুঁজুন, যেকোনো সময়, যেকোনো জায়গায়।",
         fromPeople: "আপনার মতো মানুষের থেকে",
         startEarning: "অর্থ উপার্জন শুরু করুন!",
         sellSomething: "আপনার জিনিসপত্রকে নগদে পরিণত করুন! আপনার প্রথম পণ্য আপলোড করুন এবং বিক্রি শুরু করুন।!",
@@ -155,7 +177,25 @@ const resources = {
           strategicPartnershipTitle: "অন্যান্য প্ল্যাটফর্মের তুলনায় সেলফ্লিট কেন বেছে নেবেন?",
           strategicPartnershipDesc: "সেলফ্লিট একটি নির্ভরযোগ্য এবং সুবিধাজনক মার্কেটপ্লেস অভিজ্ঞতা প্রদান করে। এটি বিনামূল্যে বিজ্ঞাপন পোস্টিং, বিভিন্ন ক্যাটাগরি এবং আপনার কেনা-বেচার প্রয়োজনের জন্য একটি বিশ্বাসযোগ্য প্ল্যাটফর্ম সরবরাহ করে।",
         
-        
+          welcomeMessage: "স্বাগতম SellFlit! একটি বিজ্ঞাপন পোস্ট করুন।",
+          chooseOption: "নীচে যেকোনো একটি বিকল্প নির্বাচন করুন",
+          
+          sellSomethings: "কিছু বিক্রি করুন",
+          sellItemCategoryService: "একটি আইটেম, বিভাগ বা পরিষেবা বিক্রি করুন",
+          
+          offerCategoryService: "পরিষেবার জন্য একটি বিভাগ অফার করুন",
+          
+          postJobVacancy: "একটি চাকরির বিজ্ঞাপন পোস্ট করুন",
+          postJobBangladesh: "বাংলাদেশে একটি চাকরির বিজ্ঞাপন পোস্ট করুন",
+          postJobSellFlit: "SellFlit-এ একটি চাকরির বিজ্ঞাপন পোস্ট করুন",
+          
+          lookForSomething: "কিছু খুঁজছেন",
+          lookForPropertyRent: "ভাড়ার জন্য সম্পত্তি খুঁজুন",
+          lookForSomethingBuy: "কিছু কেনার জন্য খুঁজুন",
+          
+          postingAllowance: "আপনার পোস্টিং ভাতা জানুন " ,
+          postingAllowance2:"আমাদের পোস্টিং নিয়ম দেখুন",
+          
 
 
         
@@ -196,10 +236,10 @@ const resources = {
       bikesGuide: "বাইকের নির্দেশিকা",
       propertyGuide: "প্রপার্টি নির্দেশিকা",
       officialBlog: "অফিসিয়াল ব্লগ",
-      downloadOurApp: "আমাদের অ্যাপ ডাউনলোড করুন",
-      googlePlay: "গুগল প্লে",
-      appStore: "অ্যাপ স্টোর",
-      otherCountries: "অন্যান্য দেশ",
+      downloadOurApp: "সার্ভিস সেলফ্লিট",
+      googlePlay: "ফ্রি বিজ্ঞাপন পোস্ট করুন",
+      appStore: "অ্যাকাউন্টের বিবরণ",
+      otherCountries: "বিভাগ পরিষেবা",
       sriLanka: "শ্রীলঙ্কা",
       allRightsReserved: "সমস্ত অধিকার সংরক্ষিত",
 

@@ -1,10 +1,7 @@
 import ScrollToTop from "../../ScrollToTop/ScrollToTop";
 import Navber from "../../Shared/Navber/Navber";
-import AboutWhy from "../AboutWhy/AboutWhy";
-// import BannerParts from "../BannerParts/BannerParts";
-import Categoryspart from "../CategoryPart/Categoryspart";
-import PromoCards from "../PromoCards/PromoCards";
-import ToggleDescription from "./ToggleDescription/ToggleDescription";
+import Slider from "../CategoryPart/Slider";
+import ProductShow from "../ProductShow/ProductShow";
 
 const Home = () => {
     return (
@@ -12,11 +9,14 @@ const Home = () => {
             <Navber/>
             <ScrollToTop />
             {/* <BannerParts/> */}
-            <Categoryspart/>
-            <PromoCards/>
-            <AboutWhy/>
+          <div className="mt-20">
+              <Slider/>
+          </div>
+            {/* <Slide/>fffffffffff */}
+            {/* <Categoryspart/> */}
+            <ProductShow/>
            
-            <ToggleDescription/>
+           
         </div>
     );
 };

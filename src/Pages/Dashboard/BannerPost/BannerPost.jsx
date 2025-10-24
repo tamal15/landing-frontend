@@ -15,7 +15,7 @@ const BannerPost = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://servers.sellflit.com/getbannerdata`
+          `https://servers.virtualshopbd.com/getbannerdata`
         );
         const result = await response.json();
         setData(result);
@@ -28,7 +28,7 @@ const BannerPost = () => {
     fetchData();
   }, []);
 
-  
+
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -42,7 +42,7 @@ const BannerPost = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`https://servers.sellflit.com/bannerpartdelete/${id}`)
+          .delete(`https://servers.virtualshopbd.com/bannerpartdelete/${id}`)
           .then((response) => {
             response.status === 204 &&
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
@@ -80,14 +80,29 @@ const BannerPost = () => {
                        title
                     </p>
                   </div>
+                  {/* <div className="w-[32%] -ms-2">
+                    <p className="text-[#007cde] shadow shadow-[#007cde] w-max mx-auto px-4 py-1 rounded-md font-semibold">
+                       link
+                    </p>
+                  </div> */}
+                  <div className="w-[32%] -ms-2">
+                    <p className="text-[#007cde] shadow shadow-[#007cde] w-max mx-auto px-4 py-1 rounded-md font-semibold">
+                       time
+                    </p>
+                  </div>
                  
                   <div className="w-[32%] ms-5">
                     <p className="text-[#007cde] shadow shadow-[#007cde] w-max mx-auto px-4 py-1 rounded-md font-semibold">
                     image
                     </p>
                   </div>
-                  <p className="w-[32%] text-[#007cde] flex justify-center">
-                    <p className="bg-[#007cde] md:w-[30%] w-[50%] text-center text-white px-3 py-1 rounded-full font-semibold">
+                  <div className="w-[32%] ms-5">
+                    <p className="text-[#007cde] shadow shadow-[#007cde] w-max mx-auto px-4 py-1 rounded-md font-semibold">
+                    Detail
+                    </p>
+                  </div>
+                  <p className="w-[34%] text-[#007cde] flex justify-center">
+                    <p className="bg-[#007cde] md:w-[30%] w-[50%] text-center text-white px-1  py-1 rounded-full font-semibold">
                       Action
                     </p>
                   </p>
@@ -101,6 +116,12 @@ const BannerPost = () => {
                     <p className="w-[32%] text-center">
                       {d.title}
                     </p>
+                    {/* <p className="w-[32%] text-center">
+                      {d.link}
+                    </p> */}
+                    <p className="w-[32%] text-center">
+                      {d.time}
+                    </p>
                    
                    
 
@@ -112,6 +133,10 @@ const BannerPost = () => {
           alt="Banner" 
         />
       </div>
+     <p className="w-[32%] text-center">
+  {d?.detail || "N/A"}
+</p>
+
     
                   
                     <div className="w-[32%] flex items-center justify-center">

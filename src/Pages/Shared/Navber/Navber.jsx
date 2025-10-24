@@ -1,23 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
-} from "react-icons/fa";
-import { FiMail, FiPhone } from "react-icons/fi";
-import { IoLogoWechat } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
+
 import { MdAccountCircle } from "react-icons/md";
 import useAuth from "../../Hooks/useAuth";
-import { useTranslationContext } from "../Context/TranslationContext";
-import { useTranslation } from "react-i18next";
+import axios from "axios";
+import { CartContext } from "../Context/CartContext";
 
 const Navber = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
-  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  // const [isDropdownOpens, setIsDropdownOpens] = useState(false);
   const { user } = useAuth();
+  const cartProducts = useContext(CartContext)[0];
+  let totalQuantity = cartProducts.reduce((acc, product) => acc + (product.quantity || 1), 0);
 
   // ✅ Ensure user properties exist
   const displayName = user?.displayName || "Guest";
@@ -27,75 +21,50 @@ const Navber = () => {
   console.log("Phone Number:", phoneNumber);
   
   // Ens
- 
-  const { switchLanguage } = useTranslationContext(); // Using the custom context function
-  const { t, i18n } = useTranslation(); // Using react-i18next hook
-  const [language, setLanguage] = useState(i18n.language); // Keep track of the current language
+  const receiverEmail = user?.phoneNumber;
 
-  // Update language state when the language changes
+  const [navData, setNavData] = useState([]);
+
   useEffect(() => {
-    setLanguage(i18n.language);
-  }, [i18n.language]);
- 
+    axios.get("https://servers.virtualshopbd.com/getnavber")
+      .then((res) => setNavData(res.data))
+      .catch((err) => console.error("Error fetching navbar data:", err));
+  }, []);
+console.log(navData)
+  useEffect(() => {
+    const fetchUnreadMessages = async () => {
+      if (!receiverEmail) return;
 
- 
+      
+    };
+
+    fetchUnreadMessages();
+    const interval = setInterval(fetchUnreadMessages, 5000); // Auto-refresh every 5 sec
+    return () => clearInterval(interval);
+  }, [receiverEmail]);
+
+
 
   // Toggle navigation menu (hamburger menu)
   const toggleNav = () => setIsNavOpen(!isNavOpen);
 
   return (
     <>
-      {/* Header Bar */}
-      <div className="bg-gradient-to-r from-[#01c0c9] to-[#007cde] text-white text-sm py-2 fixed top-0 left-0 right-0 z-[9999]">
-        <div className="container mx-auto flex flex-wrap items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center space-x-4">
-            <a
-              href="https://www.facebook.com/C.O.Overseas?mibextid=ZbWKwL"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-orange-400"
-            >
-              <FaFacebookF />
-            </a>
-
-            <a href="#" className="text-white hover:text-orange-400">
-              <FaTwitter />
-            </a>
-            <a href="#" className="text-white hover:text-orange-400">
-              <FaInstagram />
-            </a>
-            <a href="#" className="text-white hover:text-orange-400">
-              <FaLinkedinIn />
-            </a>
-          </div>
-          <div className="flex flex-wrap items-center space-x-6">
-            <div className="flex items-center">
-              <FiPhone className="mr-1 text-white" />
-              +880 1680-564154
-            </div>
-            {/* <div className="flex items-center">
-              <FiMapPin className="mr-1 text-white" />
-              Purana Paltan,Dhaka-1200, Dhaka, Bangladesh
-            </div> */}
-          </div>
-          <div className="flex items-center space-x-4">
-            <a
-              href="#"
-              className="flex items-center text-white hover:text-orange-400"
-            >
-              <FiMail className="mr-1" /> ethanfaisul@gmail.com
-            </a>
-          </div>
-        </div>
-      </div>
-
+     
       {/* Navbar */}
-      <div className="w-full inset-x-0 m-auto sticky top-[30px] md:top-[30px] z-[998]">
-        <nav className="flex justify-between items-center p-2 backdrop-blur-sm backgroundsnavbar w-full px-4 shadow-lg">
+      <div className="w-full fixed top-0 left-0  z-[998]">
+      <div style={{ backgroundColor: navData[0]?.background , color:navData[0]?.color}} className="flex flex-wrap justify-between items-center  px-4 py-2 w-full  text-sm md:text-base gap-2 md:gap-4">
+  <h1 className="whitespace-nowrap">{navData[0]?.email}</h1>
+  <h1 className="whitespace-nowrap">{navData[0]?.number}</h1>
+  <h1 className="text-center w-full md:w-auto">{navData[0]?.detail}</h1>
+</div>
+
+
+        <nav className="flex justify-between items-center p-2 backdrop-blur-sm backgroundsnavbar w-full px-4 shadow-[0_2px_10px_rgba(22,101,52,0.8)]">
           <div className="flex items-center mt-5 md:mt-0">
             <Link to="/">
               <img
-                src="https://i.ibb.co.com/HQ5Q5jf/sellflit.png"
+                src={navData[0]?.image}
                 alt="Logo Image"
                 className="w-[70px] md:h-[60px] h-[40px] md:mt-1 text-white"
               />
@@ -105,54 +74,76 @@ const Navber = () => {
           {/* Center Navigation Links */}
           <ul className={`hidden md:flex md:items-center md:gap-10`}>
             <li className="font-medium text-black text-xl">
-              <Link to="/">{t("home")}</Link>
+              <Link to="/">Home</Link>
             </li>
           
-            {user?.phoneNumber ? (
-      <>
+            
+      
         {/* If user is logged in, show Chat and Account */}
         <li className="font-medium text-black text-xl">
-          <Link to="/viewchats" className="flex">
-            <IoLogoWechat className="text-xl mt-1" />
-            <button className="ms-2">{t("chat")}</button>
+          <Link to="/aboutpart" className="flex">
+            <CgProfile className="text-xl mt-1" />
+            <button className="ms-2">About
+            
+            </button>
+           
           </Link>
         </li>
 
         <li className="font-medium text-black text-xl">
-          <Link to="/accounts" className="flex">
+          <Link to="/allads" className="flex">
             <MdAccountCircle className="text-xl mt-1" />
-            <button className="ms-2">{t("account")}</button>
+            <button className="ms-2">All Ads</button>
           </Link>
         </li>
-      </>
-    ) : (
-      <>
-        {/* If user is not logged in, show only Login */}
         <li className="font-medium text-black text-xl">
-          <Link to="/login" className="flex">
-            <button className="ms-2">{t("logins")}</button>
-          </Link>
+       <Link to="/OrderReview">
+       <button className="relative p-2">
+        <span className="absolute -top-2 -right-2 bg-green-800 text-white text-xs rounded-full px-2">
+          {totalQuantity || 0}
+        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-6 h-6 text-black"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 3h2l1 5m0 0h13l-1.4 7H7.4L6 8m0 0L5 3m2 15a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4z"
+          />
+        </svg>
+      </button>
+       
+       </Link>
         </li>
-      </>
-    )}
+      
+  
+    
+    
             <li className="font-medium text-black text-xl">
-              <Link to="/allads">
-              <button className=" ms-1">{t("allAds")}</button>
+              <Link to="/blog">
+              <button className=" ms-1">Blog</button>
               </Link>
            
             </li>
             <li className="font-medium text-black text-xl">
-            <button className="bg-[#007cde] text-white py-1 px-3 rounded-full" onClick={() => switchLanguage(language === "en" ? "bn" : "en")}>
-        {language === "en" ? "বাংলা" : "English"}
+           <Link to="/offer">
+           <button style={{ backgroundColor: navData[0]?.background , color:navData[0]?.color}} className=" py-1 px-3 rounded-full" >
+             Offer
       </button>
+           </Link>
             </li>
             
           </ul>
 
           {/* Contact Us Link */}
           <div className="hidden md:block">
-            <Link to="/postadpages">
-            <button className="bg-[#007cde] text-white px-4 py-2 rounded-full font-bold">{t("postFreeAd")}</button>
+            <Link to="/contactdata">
+            <button style={{ backgroundColor: navData[0]?.background , color:navData[0]?.color}} className=" px-4 py-2 rounded-full font-bold">Contact Us</button>
             </Link>
           
           </div>
@@ -176,60 +167,75 @@ const Navber = () => {
 >
   <li className="font-medium text-black text-xl py-2">
     <Link to="/" onClick={() => setIsNavOpen(false)}>
-      {t("home")}
+     Home
     </Link>
   </li>
 
-  {user?.phoneNumber ? (
+ 
     <>
       {/* If user is logged in, show Chat and Account */}
       <li className="font-medium text-black text-xl py-2">
-        <Link to="/viewchats" className="flex" onClick={() => setIsNavOpen(false)}>
-          <IoLogoWechat className="text-xl mt-1" />
-          <button className="ms-2">{t("chat")}</button>
+        <Link to="/aboutpart" className="flex" onClick={() => setIsNavOpen(false)}>
+          <CgProfile className="text-xl mt-1" />
+          <button className="ms-2">About
+            </button>
         </Link>
       </li>
 
       <li className="font-medium text-black text-xl py-2">
-        <Link to="/accounts" className="flex" onClick={() => setIsNavOpen(false)}>
+        <Link to="/allads" className="flex" onClick={() => setIsNavOpen(false)}>
           <MdAccountCircle className="text-xl mt-1" />
-          <button className="ms-2">{t("account")}</button>
+          <button className="ms-2">All Ads</button>
         </Link>
       </li>
+      <li className="font-medium text-black text-xl">
+      <Link to="/OrderReview">
+       <button className="relative p-2">
+        <span className="absolute -top-2 -right-2 bg-green-800 text-white text-xs rounded-full px-2">
+          {totalQuantity || 0}
+        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-6 h-6 text-black"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 3h2l1 5m0 0h13l-1.4 7H7.4L6 8m0 0L5 3m2 15a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4z"
+          />
+        </svg>
+      </button>
+       
+       </Link>
+        </li>
     </>
-  ) : (
-    <>
-      {/* If user is not logged in, show only Login */}
-      <li className="font-medium text-black text-xl py-2">
-        <Link to="/login" className="flex" onClick={() => setIsNavOpen(false)}>
-          <button className="ms-2">{t("logins")}</button>
-        </Link>
-      </li>
-    </>
-  )}
+  
+   
 
   <li className="font-medium text-black text-xl py-2">
-    <Link to="/allads" onClick={() => setIsNavOpen(false)}>
-      <button className="ms-1">{t("allAds")}</button>
+    <Link to="/blog" onClick={() => setIsNavOpen(false)}>
+      <button className="ms-1">Blog</button>
     </Link>
   </li>
 
   <li className="font-medium text-black text-xl py-2">
-    <button
-      className="bg-[#007cde] text-white py-1 px-3 rounded-full"
-      onClick={() => {
-        switchLanguage(language === "en" ? "bn" : "en");
-        setIsNavOpen(false);
-      }}
+  <Link to="/offer">
+  <button
+      className="bg-green-800 text-white py-1 px-3 rounded-full"
     >
-      {language === "en" ? "বাংলা" : "English"}
+     Offer
     </button>
+  </Link>
   </li>
 
   <div className="md:block py-2">
-    <Link to="/postadpages" onClick={() => setIsNavOpen(false)}>
-      <button className="bg-[#007cde] text-white px-4 py-2 rounded-full font-bold">
-        {t("postFreeAd")}
+    <Link to="/contactdata" onClick={() => setIsNavOpen(false)}>
+      <button className="bg-green-800 text-white px-4 py-2 rounded-full font-bold">
+       Contact Us
       </button>
     </Link>
   </div>

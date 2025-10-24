@@ -7,7 +7,7 @@ const SubAdmin = () => {
 
   // Fetch admin list
   useEffect(() => {
-    fetch("https://servers.sellflit.com/getadminlist")
+    fetch(`https://servers.virtualshopbd.com/getadminlist`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -28,7 +28,7 @@ const SubAdmin = () => {
     e.preventDefault();
     const user = { phoneNumber };
 
-    fetch("https://servers.sellflit.com/userLogin/subadmin", {
+    fetch(`https://servers.virtualshopbd.com/userLogin/subadmin`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const SubAdmin = () => {
   };
 
   const handleDeleteAdmin = (phoneNumber) => {
-    fetch(`https://servers.sellflit.com/userLogin/subadmin/${phoneNumber}`, {
+    fetch(`https://servers.virtualshopbd.com/userLogin/subadmin/${phoneNumber}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" }, // Ensure JSON communication
     })

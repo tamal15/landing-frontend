@@ -34,7 +34,7 @@ const Dashboard = () => {
       >
         <div className="w-full">
           <div className="hidden md:flex items-center gap-5">
-            <img className="w-36 h-24 ms-3 mt-2" src="https://i.ibb.co.com/HQ5Q5jf/sellflit.png" />
+            <img className="w-36 h-24 ms-3 mt-2" src="https://cdn-icons-png.freepik.com/512/5432/5432747.png" />
           </div>
           <DashboardSideBar setIsOpenSidebar={setIsOpenSidebar} />
         </div>

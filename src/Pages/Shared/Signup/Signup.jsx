@@ -2,102 +2,53 @@ import { useState } from "react";
 import { Link,  useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
-import { FcCameraAddon, FcNeutralTrading, FcSearch } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import CryptoJS from 'crypto-js';
+
+const ENCRYPTION_KEY = '12345678901234567890123456789012'; // 32 chars key
+
+// Encryption function
+function encryptData(data) {
+    const jsonData = JSON.stringify(data);
+    const key = CryptoJS.enc.Utf8.parse(ENCRYPTION_KEY);
+    const iv = CryptoJS.lib.WordArray.random(16);
+    const encrypted = CryptoJS.AES.encrypt(jsonData, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+    return `${iv.toString(CryptoJS.enc.Hex)}:${encrypted.ciphertext.toString(CryptoJS.enc.Hex)}`;
+}
+
 
 const Signup = () => {
   const {  authError } = useAuth();
   // const location = useLocation();
   const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [otp, setOtp] = useState("");
-  const [otpSent, setOtpSent] = useState(false);
-  const [otpVerified, setOtpVerified] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
   const { register, handleSubmit } = useForm();
 
-  // Send OTP to phone number
-  const sendOtp = async () => {
-    if (!/^\d{11}$/.test(phoneNumber)) {
-      alert("Please enter a valid 11-digit Bangladeshi phone number.");
-      return;
-    }
-    try {
-      const response = await fetch("https://servers.sellflit.com/send-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phoneNumber }),
-      });
-      const data = await response.json();
-      if (data.success) {
-        setOtpSent(true);
-        alert("OTP sent successfully!");
-      } else {
-        alert(data.message || "Failed to send OTP.");
-      }
-    } catch (error) {
-      console.error(error);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Error sending OTP.",
-      });
-    }
-  };
-
-  // Verify OTP
-  const verifyOtp = async () => {
-    try {
-      const response = await fetch("https://servers.sellflit.com/verify-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phoneNumber, otp }),
-      });
-      const data = await response.json();
-      if (data.success) {
-        setOtpVerified(true);
-        setSuccessMessage("OTP Verified Successfully!");
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: data.message || "Invalid OTP.",
-        });
-      }
-    } catch (error) {
-      console.error(error);
-      Swal.fire({
-        icon: "error",
-        title: "Verification Failed",
-        text: "Error verifying OTP.",
-      });
-    }
-  };
+  //
+ 
 
   // Submit Registration Data
   const onSubmit = async (data) => {
-    if (!otpVerified) {
-      Swal.fire({
-        icon: "warning",
-        title: "Attention!",
-        text: "Please verify OTP first!",
-      });
-      
-      return;
-    }
+    
   
     // if (data.password !== data.password2) {
     //   alert("Your passwords do not match");
     //   return;
     // }
+     // Encrypt the data
+     const encryptedData = encryptData({
+      displayName: data.name,
+      password: data.password,
+      phoneNumber
+  });
   
     try {
       // Send registration data
-      const response = await fetch("https://servers.sellflit.com/users", {
+      const response = await fetch(`https://servers.virtualshopbd.com/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({  displayName: data.name, password:data.password, phoneNumber }),
+        body: JSON.stringify({ payload: encryptedData }),
       });
   
       const result = await response.json();
@@ -136,27 +87,12 @@ const Signup = () => {
         <div className="flex flex-col md:flex-row items-center justify-center rounded-lg overflow-hidden">
           {/* Left Section */}
           <div className="p-5">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">SellFlit এ স্বাগতম!</h2>
-            <p className="text-gray-600 mb-6">আপনার অ্যাকাউন্ট তৈরি করুন এবং নিচের সুবিধাগুলো উপভোগ করুন।</p>
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <FcNeutralTrading className="w-10 h-10 mr-4"/>
-                <p className="text-gray-700 font-medium">আপনার পণ্য বা সেবার বিজ্ঞাপন দ্রুত এবং সহজেই পোস্ট করুন।</p>
-              </div>
-              <div className="flex items-start">
-                <FcSearch className="w-10 h-10 mr-4"/>
-                <p className="text-gray-700 font-medium">আপনার পছন্দের বিজ্ঞাপনগুলো ফেভারিট হিসেবে সংরক্ষণ করুন।</p>
-              </div>
-              <div className="flex items-start">
-                <FcCameraAddon className="w-10 h-10 mr-4"/>
-                <p className="text-gray-700 font-medium">প্রয়োজনমতো সময়ে বিজ্ঞাপনগুলো দেখুন ও নিয়ন্ত্রণ করুন।</p>
-              </div>
-            </div>
+          <img src="https://img.freepik.com/free-vector/login-concept-illustration_114360-739.jpg"/>
           </div>
 
           {/* Signup Form */}
-          <div className="md:w-1/2 rounded-xl p-9 bg-gradient-to-r from-[#01c0c9] to-[#007cde] text-white">
-            <h2 className="text-2xl font-bold text-white text-center mb-6">Sign Up to SellFlit</h2>
+          <div className="md:w-1/2 rounded-xl p-9 bg-[#01c0c9] text-white">
+            <h2 className="text-2xl font-bold text-white text-center mb-6">Sign Up to Website</h2>
             
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <input
@@ -193,47 +129,17 @@ const Signup = () => {
                 />
               </div>
 
-              {otpSent && (
-                <div className="mb-4">
-                  <label className="block mb-2 text-sm font-medium text-gray-700">OTP</label>
-                  <input
-                    type="text"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    className="w-full text-black px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter OTP"
-                    maxLength={6}
-                  />
-                </div>
-              )}
+            
+              
+              
+              
 
-              {!otpSent ? (
-                <button
-                  type="button"
-                  onClick={sendOtp}
-                  className="w-full py-3 bg-white font-medium text-black rounded-md hover:bg-blue-700"
-                >
-                  Send OTP
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={verifyOtp}
-                  className="w-full py-3 bg-blue-700 text-white rounded-md hover:bg-green-700"
-                  disabled={otpVerified}
-                >
-                  {otpVerified ? "OTP Verified ✅" : "Verify OTP"}
-                </button>
-              )}
-
-              {successMessage && (
-                <p className="mt-4 text-white font-semibold">{successMessage}</p>
-              )}
+              
 
               <button
                 type="submit"
-                className="w-full py-3 bg-gray-300 text-black font-medium rounded-md hover:bg-blue-700 transition duration-300"
-                disabled={!otpVerified}
+                className={`w-full bg-white text-black py-3 font-medium rounded-md transition duration-300 `}
+               
               >
                 Sign Up
               </button>

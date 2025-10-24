@@ -9,12 +9,12 @@
 // };
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDdVr0IwbI8mKLGmgW6FNGJGnpJ0ISbN4I",
-  authDomain: "tocash-4af3a.firebaseapp.com",
-  projectId: "tocash-4af3a",
-  storageBucket: "tocash-4af3a.firebasestorage.app",
-  messagingSenderId: "670030261673",
-  appId: "1:670030261673:web:2912d4181cb22ecb2228b8"
+  apiKey: "AIzaSyD1Ag_QzDfBVlyGaufE8xPjDEMWbMCgI28",
+  authDomain: "punjabi-shops.firebaseapp.com",
+  projectId: "punjabi-shops",
+  storageBucket: "punjabi-shops.firebasestorage.app",
+  messagingSenderId: "184248974004",
+  appId: "1:184248974004:web:701d99f24bb2c27c2cf5e1"
 };
   
   

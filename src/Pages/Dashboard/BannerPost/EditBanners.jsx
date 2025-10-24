@@ -3,20 +3,21 @@ import { FaArrowLeft } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const image_hosting_key = "87e8c93db3b7d5540df8a8f00585cbe9";
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-
 const EditBanners = () => {
   const [banner, setBanner] = useState({
     title: "",
+    link: "",
+    time: "",
+    detail: "",
     image: "",
   });
-  const [imageFile, setImageFile] = useState(null); // State to hold the selected image file
+  const [imageFile, setImageFile] = useState(null);
   const { id } = useParams();
+  const image_upload_api = `https://servers.virtualshopbd.com/upload`;
 
   // Fetch banner data
   useEffect(() => {
-    fetch(`https://servers.sellflit.com/editbaners/${id}`)
+    fetch(`https://servers.virtualshopbd.com/editbaners/${id}`)
       .then((res) => res.json())
       .then((data) => setBanner(data))
       .catch((error) => console.error("Error fetching banner:", error));
@@ -25,8 +26,8 @@ const EditBanners = () => {
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setBanner((prevBanner) => ({
-      ...prevBanner,
+    setBanner((prev) => ({
+      ...prev,
       [name]: value,
     }));
   };
@@ -37,33 +38,34 @@ const EditBanners = () => {
     setImageFile(file);
   };
 
-  // Upload image to imgbb and get the URL
+  // Upload image to server and return URL
   const uploadImage = async (file) => {
     const formData = new FormData();
     formData.append("image", file);
-    const response = await fetch(image_hosting_api, {
+
+    const response = await fetch(image_upload_api, {
       method: "POST",
       body: formData,
     });
+
     const data = await response.json();
-    if (data?.data?.url) {
-      return data.data.url;
+    if (data?.url) {
+      return data.url;
     } else {
       throw new Error("Image upload failed");
     }
   };
 
-  // Handle update
+  // Handle form submit (update)
   const handleUpdate = async (e) => {
     e.preventDefault();
 
     let updatedBanner = { ...banner };
 
-    // Upload image if new file is selected
     if (imageFile) {
       try {
         const imageUrl = await uploadImage(imageFile);
-        updatedBanner.image = imageUrl; // Update backgroundImage with the new image URL
+        updatedBanner.image = imageUrl;
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -74,23 +76,32 @@ const EditBanners = () => {
       }
     }
 
-    // Send the updated data to the server
-    fetch(`https://servers.sellflit.com/bannerdataupdate/${id}`, {
+    // Send updated data
+    fetch(`https://servers.virtualshopbd.com/bannerdataupdate/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedBanner),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.modifiedCount > 0) {
+        if (data.modifiedCount > 0 || data.success) {
           Swal.fire({
             icon: "success",
             title: "Update Success",
-            text: "Project updated successfully!",
+            text: "Banner updated successfully!",
+          });
+        } else {
+          Swal.fire({
+            icon: "info",
+            title: "No Changes",
+            text: "Nothing was changed.",
           });
         }
       })
-      .catch((error) => console.error("Error updating banner:", error));
+      .catch((error) => {
+        console.error("Error updating banner:", error);
+        Swal.fire("Error updating banner.");
+      });
   };
 
   return (
@@ -98,40 +109,52 @@ const EditBanners = () => {
       <div className="py-5 md:px-64">
         <div className="container">
           <div>
-            <div
-              className="relative login-form text-center shadow"
-              style={{ borderRadius: "20px" }}
-            >
+            <div className="relative login-form text-center shadow" style={{ borderRadius: "20px" }}>
               <Link to={-1}>
                 <FaArrowLeft className="relative top-2 left-2 text-[#01c0c9] bg-primary text-3xl p-2 rounded-full duration-300 active:scale-90 cursor-pointer select-none" />
               </Link>
-              <h2 className="mb-5 text-black text-3xl font-semibold">
-                Update Home Project
-              </h2>
+              <h2 className="mb-5 text-black text-3xl font-semibold">Update Home Project</h2>
               <form onSubmit={handleUpdate}>
                 <input
                   onChange={handleChange}
                   value={banner.title}
-                  style={{
-                    fontWeight: "600",
-                    color: "#0E1621",
-                    height: "60px",
-                  }}
-                  className="input input-text border-[2px] border-[#01c0c9] hover:border-[#007cde] rounded-3xl px-5 py-2 w-full input-wrapper md:min-w-[450px] max-w-[20.5rem] mx-2 text-xl mt-2"
-                  placeholder="Title"
                   name="title"
+                  placeholder="Title"
+                  style={{ fontWeight: "600", color: "#0E1621", height: "60px" }}
+                  className="input input-text border-[2px] border-[#01c0c9] hover:border-[#007cde] rounded-3xl px-5 py-2 w-full md:min-w-[450px] max-w-[20.5rem] mx-2 text-xl mt-2"
                 />
                 <br />
-                
+
+                <input
+                  onChange={handleChange}
+                  value={banner.detail}
+                  name="detail"
+                  placeholder="Detail"
+                  style={{ fontWeight: "600", color: "#0E1621", height: "60px" }}
+                  className="input input-text border-[2px] border-[#01c0c9] hover:border-[#007cde] rounded-3xl px-5 py-2 w-full md:min-w-[450px] max-w-[20.5rem] mx-2 text-xl mt-2"
+                />
+                <br />
+
+                <input
+                  onChange={handleChange}
+                  value={banner.time}
+                  name="time"
+                  placeholder="example 5000 means 5sec 6000 6s"
+                  style={{ fontWeight: "600", color: "#0E1621", height: "60px" }}
+                  className="input input-text border-[2px] border-[#01c0c9] hover:border-[#007cde] rounded-3xl px-5 py-2 w-full md:min-w-[450px] max-w-[20.5rem] mx-2 text-xl mt-2"
+                />
+                <br />
+
                 <input
                   type="file"
                   onChange={handleImageChange}
-                  className="input-file border-[2px] border-[#01c0c9] hover:border-[#007cde] rounded-3xl px-5 py-2 w-full input-wrapper md:min-w-[450px] max-w-[20.5rem] mx-2 text-xl mt-2"
+                  className="input-file border-[2px] border-[#01c0c9] hover:border-[#007cde] rounded-3xl px-5 py-2 w-full md:min-w-[450px] max-w-[20.5rem] mx-2 text-xl mt-2"
                 />
                 <br />
+
                 <button
-                  className="bg-[#01c0c9] font-semibold text-white mt-5 mb-10 px-6 py-2 text-xl rounded-2xl"
                   type="submit"
+                  className="bg-[#01c0c9] font-semibold text-white mt-5 mb-10 px-6 py-2 text-xl rounded-2xl"
                 >
                   Update
                 </button>

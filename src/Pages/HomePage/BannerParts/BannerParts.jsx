@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Slider from "../CategoryPart/Slider";
 // { searchQuery, setSearchQuery } 
 const BannerParts = () => {
     const { t } = useTranslation();
@@ -55,15 +56,10 @@ const BannerParts = () => {
           </div>
   
           {/* Right Section: Illustration */}
-          <div className="flex justify-center items-center relative">
-            <div className="absolute md:-top-1 -top-10 md:-left-8 md:w-64 w-52 h-32 bg-[#01c0c9] rounded-full blur-2xl opacity-30"></div>
+          <div className="flex justify-center items-center relative mt-24">
+            <div className="absolute md:-top-1  top-10 md:-left-8 md:w-64 w-52 h-28 bg-[#01c0c9] rounded-full blur-2xl opacity-30"></div>
   
-            <img
-              // src="https://i.ibb.co.com/RTQ9ZXHq/Png-afridi.png"
-              src="https://i.ibb.co.com/4KpcbnT/component-it.webp"
-              alt="Illustration"
-              className="md:w-full w-[200px] -mt-7 md:-mt-10 md:h-[400px] h-[80px] max-w-xs md:max-w-sm"
-            />
+           <Slider/>
           </div>
         </div>
       </div>

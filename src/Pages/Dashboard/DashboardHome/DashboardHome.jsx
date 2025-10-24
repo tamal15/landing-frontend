@@ -1,9 +1,11 @@
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 // import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { FaSpinner } from "react-icons/fa";
 import Modal from "react-modal";
 // import { AuthContext } from "../../../providers/AuthProvider";
+import { FaClipboardList, FaClock, FaCheckCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -23,6 +25,23 @@ const DashboardHome = () => {
   // console.log("-> Here is the user: ");
   // console.log(user);
 
+   const [totalOrders, setTotalOrders] = useState(0);
+  const [pendingCount, setPendingCount] = useState(0);
+  const [approvedCount, setApprovedCount] = useState(0);
+
+  useEffect(() => {
+    fetch("https://servers.virtualshopbd.com/userMy")
+      .then(res => res.json())
+      .then(data => {
+        const pendingOrders = data.filter(order => order.status === "Pending");
+        const approvedOrders = data.filter(order => order.status === "approved");
+
+        setTotalOrders(data.length);
+        setPendingCount(pendingOrders.length);
+        setApprovedCount(approvedOrders.length);
+      });
+  }, []);
+
   const isPasswordValid = (password) => {
     if (password.length < 8) {
       return false;
@@ -32,6 +51,8 @@ const DashboardHome = () => {
 
     return hasLetter && hasNumber;
   };
+
+
 
   const handleChangePassword = async (e) => {
     setLoader(true);
@@ -60,16 +81,57 @@ const DashboardHome = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  
   return (
     <div className="flex flex-col items-center gap-4 mt-10">
-      <p className="text-3xl md:text-5xl font-bold">
-        Admin <span className="text-orange-500">Dashboard</span>
-      </p>
-      {/* <p className="font-semibold md:text-xl">Welcome - {user.email}</p> */}
-      <p className="font-semibold md:text-xl">
-        Where you can{" "}
-        <span className="text-orange-500">customize everything</span>
-      </p>
+    <div className="p-6">
+      <div className="text-center mb-8">
+        <p className="text-3xl md:text-5xl font-bold">
+          Admin <span className="text-orange-500">Dashboard</span>
+        </p>
+        <p className="font-semibold md:text-xl">
+          Where you can <span className="text-orange-500">customize everything</span>
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Total Orders */}
+        <Link to="/dashboard/AllUserorder">
+         <div className="bg-blue-100 shadow-md p-6 rounded-xl flex items-center gap-4">
+          <FaClipboardList className="text-blue-600 text-4xl" />
+          <div>
+            <h2 className="text-xl font-bold">Total Orders</h2>
+            <p className="text-2xl font-semibold text-blue-800">{totalOrders}</p>
+          </div>
+        </div>
+        </Link>
+       
+
+        {/* Pending Orders */}
+       <Link to="/dashboard/updateorder">
+        <div className="bg-yellow-100 shadow-md p-6 rounded-xl flex items-center gap-4">
+          <FaClock className="text-yellow-600 text-4xl" />
+          <div>
+            <h2 className="text-xl font-bold">Pending Orders</h2>
+            <p className="text-2xl font-semibold text-yellow-800">{pendingCount}</p>
+          </div>
+        </div>
+       </Link>
+
+        {/* Approved Orders */}
+         <Link to="/dashboard/approvedorders">
+          <div className="bg-green-100 shadow-md p-6 rounded-xl flex items-center gap-4">
+          <FaCheckCircle className="text-green-600 text-4xl" />
+          <div>
+            <h2 className="text-xl font-bold">Approved Orders</h2>
+            <p className="text-2xl font-semibold text-green-800">{approvedCount}</p>
+          </div>
+        </div>
+         </Link>
+       
+      </div>
+    </div>
       <div className="flex items-center gap-5 mt-6">
         <button
           onClick={async () => {
