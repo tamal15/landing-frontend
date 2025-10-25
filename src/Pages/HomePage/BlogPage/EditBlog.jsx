@@ -18,7 +18,7 @@ const EditBlog = () => {
 
   // Fetch about data
   useEffect(() => {
-    fetch(`https://servers.virtualshopbd.com/editblogs/${id}`)
+    fetch(`http://localhost:5000/editblogs/${id}`)
       .then((res) => res.json())
       .then((data) => setAboutData(data))
       .catch((error) => console.error("Error fetching about data:", error));
@@ -77,7 +77,7 @@ const EditBlog = () => {
     }
 
     // Send the updated data to the server
-    fetch(`https://servers.virtualshopbd.com/blogdataupdate/${id}`, {
+    fetch(`http://localhost:5000/blogdataupdate/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedAboutData),

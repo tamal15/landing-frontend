@@ -18,10 +18,10 @@ const EditProduct = () => {
 
   const [imageFiles, setImageFiles] = useState([]);
   const { id } = useParams();
-  const image_upload_api = `https://servers.virtualshopbd.com/upload`;
+  const image_upload_api = `http://localhost:5000/upload`;
 
   useEffect(() => {
-    fetch(`https://servers.virtualshopbd.com/editproductdata/${id}`)
+    fetch(`http://localhost:5000/editproductdata/${id}`)
       .then((res) => res.json())
       .then((data) => setBanner(data))
       .catch((error) => console.error("Error fetching product:", error));
@@ -68,7 +68,7 @@ const EditProduct = () => {
         updatedBanner.images = [...banner.images, ...uploadedUrls];
       }
 
-      const res = await fetch(`https://servers.virtualshopbd.com/productdataupdate/${id}`, {
+      const res = await fetch(`http://localhost:5000/productdataupdate/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedBanner),

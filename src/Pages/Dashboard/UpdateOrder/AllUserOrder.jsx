@@ -15,7 +15,7 @@ const AllUserOrder = () => {
   const ordersPerPage = 10;
 
   useEffect(() => {
-    fetch(`https://servers.virtualshopbd.com/userMy`)
+    fetch(`http://localhost:5000/userMy`)
       .then((res) => res.json())
       .then((data) => setOrder(data));
   }, []);
@@ -32,7 +32,7 @@ const AllUserOrder = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`https://servers.virtualshopbd.com/manageAllOrderDelete/${id}`)
+          .delete(`http://localhost:5000/manageAllOrderDelete/${id}`)
           .then(() => {
             setOrder(ordering.filter((order) => order._id !== id));
             Swal.fire("Deleted!", "Order has been deleted.", "success");

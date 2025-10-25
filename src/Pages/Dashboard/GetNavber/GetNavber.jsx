@@ -12,7 +12,7 @@ const GetNavber = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://servers.virtualshopbd.com/getnavber`
+          `http://localhost:5000/getnavber`
         );
         const result = await response.json();
         setData(result);

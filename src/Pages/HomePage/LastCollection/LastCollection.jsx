@@ -32,7 +32,7 @@ const LastCollection = () => {
         async function fetchData() {
           try {
             const response = await fetch(
-              `https://servers.virtualshopbd.com/getproducts`
+              `http://localhost:5000/getproducts`
             );
             const result = await response.json();
             setData(result);

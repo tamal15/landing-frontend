@@ -24,7 +24,7 @@ console.log(book)
 
 
   useEffect(() => {
-    fetch(`https://servers.virtualshopbd.com/product/${id}`)
+    fetch(`http://localhost:5000/product/${id}`)
       .then((res) => res.json())
       .then((data) => setBook(data));
 
@@ -65,7 +65,7 @@ console.log(book)
     };
 
     axios
-      .post("https://servers.virtualshopbd.com/init", paymentData)
+      .post("http://localhost:5000/init", paymentData)
       .then(() => {
         Swal.fire({ title: "Success!", text: "Payment successful!", icon: "success" }).then(() => {
           localStorage.removeItem("productCart");
@@ -89,7 +89,7 @@ console.log(book)
     // Fetch the footer data from the backend
     const fetchFooterData = async () => {
       try {
-        const response = await axios.get("https://servers.virtualshopbd.com/getfooters"); // Adjust the API URL as needed
+        const response = await axios.get("http://localhost:5000/getfooters"); // Adjust the API URL as needed
         setFooterData(response.data[0]); // Assuming you're returning an array with one object
       } catch (error) {
         console.error("Error fetching footer data:", error);

@@ -13,11 +13,11 @@ const EditBanners = () => {
   });
   const [imageFile, setImageFile] = useState(null);
   const { id } = useParams();
-  const image_upload_api = `https://servers.virtualshopbd.com/upload`;
+  const image_upload_api = `http://localhost:5000/upload`;
 
   // Fetch banner data
   useEffect(() => {
-    fetch(`https://servers.virtualshopbd.com/editbaners/${id}`)
+    fetch(`http://localhost:5000/editbaners/${id}`)
       .then((res) => res.json())
       .then((data) => setBanner(data))
       .catch((error) => console.error("Error fetching banner:", error));
@@ -77,7 +77,7 @@ const EditBanners = () => {
     }
 
     // Send updated data
-    fetch(`https://servers.virtualshopbd.com/bannerdataupdate/${id}`, {
+    fetch(`http://localhost:5000/bannerdataupdate/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedBanner),

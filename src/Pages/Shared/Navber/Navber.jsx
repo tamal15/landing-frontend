@@ -26,7 +26,7 @@ const Navber = () => {
   const [navData, setNavData] = useState([]);
 
   useEffect(() => {
-    axios.get("https://servers.virtualshopbd.com/getnavber")
+    axios.get("http://localhost:5000/getnavber")
       .then((res) => setNavData(res.data))
       .catch((err) => console.error("Error fetching navbar data:", err));
   }, []);

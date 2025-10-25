@@ -27,7 +27,7 @@ const CategoryPage = () => {
     };
 
   useEffect(() => {
-    fetch(`https://servers.virtualshopbd.com/getproducts`)
+    fetch(`http://localhost:5000/getproducts`)
       .then((response) => response.json())
       .then((data) => {
         const filteredProducts = data

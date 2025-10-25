@@ -46,7 +46,7 @@ const UploadOffer = () => {
             images,
         };
 
-        fetch("https://servers.virtualshopbd.com/offerpost", {
+        fetch("http://localhost:5000/offerpost", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(productData),

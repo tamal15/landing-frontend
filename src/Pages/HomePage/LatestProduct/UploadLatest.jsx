@@ -46,7 +46,7 @@ const UploadLatest = () => {
             images,
         };
 
-        fetch("https://servers.virtualshopbd.com/postlatest", {
+        fetch("http://localhost:5000/postlatest", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(productData),

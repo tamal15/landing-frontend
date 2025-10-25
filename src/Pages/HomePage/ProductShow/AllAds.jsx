@@ -11,7 +11,7 @@ const AllAds = () => {
   const [cart, setCart] = useContext(CartContext);
 
   useEffect(() => {
-    fetch("https://servers.virtualshopbd.com/getproducts")
+    fetch("http://localhost:5000/getproducts")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.reverse()); // latest products first

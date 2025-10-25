@@ -27,7 +27,7 @@ const OfferPage = () => {
   };
 
   useEffect(() => {
-    fetch(`https://servers.virtualshopbd.com/getoffer`)
+    fetch(`http://localhost:5000/getoffer`)
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));

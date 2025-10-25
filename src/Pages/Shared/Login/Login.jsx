@@ -30,7 +30,7 @@ const Login = () => {
         return;
       }
       try {
-        const response = await fetch(`https://servers.virtualshopbd.com/reset-password`, {
+        const response = await fetch(`http://localhost:5000/reset-password`, {
           method: "PUT", // ✅ Use PUT method for updating password
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ phoneNumber, newPassword }),

@@ -12,7 +12,7 @@ const ApprovedOrder = () => {
     const ordersPerPage = 6; // Number of orders per page
 
     useEffect(() => {
-        fetch(`https://servers.virtualshopbd.com/userMy`)
+        fetch(`http://localhost:5000/userMy`)
             .then(res => res.json())
             .then(data => {
                 const pendingOrders = data.filter(order => order.status === "approved");
@@ -32,7 +32,7 @@ const ApprovedOrder = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://servers.virtualshopbd.com/manageAllOrderDelete/${id}`)
+                axios.delete(`http://localhost:5000/manageAllOrderDelete/${id}`)
                     .then(() => {
                         setOrder(ordering.filter((order) => order._id !== id));
                         Swal.fire('Deleted!', 'Order has been deleted.', 'success');

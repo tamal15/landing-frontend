@@ -14,7 +14,7 @@ const GetOffer = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://servers.virtualshopbd.com/getoffer`
+          `http://localhost:5000/getoffer`
         );
         const result = await response.json();
         setData(result);
@@ -41,7 +41,7 @@ const GetOffer = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`https://servers.virtualshopbd.com/offerpartdelete/${id}`)
+          .delete(`http://localhost:5000/offerpartdelete/${id}`)
           .then((response) => {
             response.status === 204 &&
               Swal.fire("Deleted!", "Your file has been deleted.", "success");

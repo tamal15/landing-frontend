@@ -26,7 +26,7 @@ const ProductShow = () => {
   };
 
   useEffect(() => {
-    fetch("https://servers.virtualshopbd.com/getproducts")
+    fetch("http://localhost:5000/getproducts")
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));

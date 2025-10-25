@@ -22,7 +22,7 @@ const EditOffer = () => {
 
   // Fetch banner data
   useEffect(() => {
-    fetch(`https://servers.virtualshopbd.com/editoffer/${id}`)
+    fetch(`http://localhost:5000/editoffer/${id}`)
       .then((res) => res.json())
       .then((data) => setBanner(data))
       .catch((error) => console.error("Error fetching banner:", error));
@@ -81,7 +81,7 @@ const EditOffer = () => {
     }
 
     // Send the updated data to the server
-    fetch(`https://servers.virtualshopbd.com/offerupdate/${id}`, {
+    fetch(`http://localhost:5000/offerupdate/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedBanner),

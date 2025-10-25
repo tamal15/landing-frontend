@@ -12,7 +12,7 @@ const AddPost = () => {
     setIsOpen(!isOpen);
   };
 
-  const image_upload_api = `https://servers.virtualshopbd.com/upload`;
+  const image_upload_api = `http://localhost:5000/upload`;
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -52,7 +52,7 @@ const AddPost = () => {
     };
 
     try {
-      await axios.post(`https://servers.virtualshopbd.com/postaddbanner`, formData);
+      await axios.post(`http://localhost:5000/postaddbanner`, formData);
       Swal.fire({
         icon: "success",
         title: "Post Success",
