@@ -5,7 +5,7 @@ const AboutPart = () => {
   const [aboutData, setAboutData] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/aboutparts") // Fetching data from the API
+    fetch("https://api.styleunionshop.com/aboutparts") // Fetching data from the API
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

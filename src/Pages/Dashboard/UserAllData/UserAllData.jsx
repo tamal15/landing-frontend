@@ -8,7 +8,7 @@ const UserAllData = () => {
 
   // Fetch all users
   useEffect(() => {
-    fetch(`http://localhost:5000/getadminlist`)
+    fetch(`https://api.styleunionshop.com/getadminlist`)
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
@@ -33,7 +33,7 @@ const UserAllData = () => {
   const handleBlockUser = (phoneNumber) => {
     if (window.confirm("Are you sure you want to block this user?")) {
         setLoading(true);
-        fetch(`http://localhost:5000/blockuser/${phoneNumber}`, {
+        fetch(`https://api.styleunionshop.com/blockuser/${phoneNumber}`, {
             method: "PATCH",
         })
         .then((res) => res.json())
@@ -62,7 +62,7 @@ const UserAllData = () => {
   const handleUnblockUser = (phoneNumber) => {
     if (window.confirm("Are you sure you want to unblock this user?")) {
         setLoading(true);
-        fetch(`http://localhost:5000/unblockuser/${phoneNumber}`, {
+        fetch(`https://api.styleunionshop.com/unblockuser/${phoneNumber}`, {
             method: "PATCH",
         })
         .then((res) => res.json())

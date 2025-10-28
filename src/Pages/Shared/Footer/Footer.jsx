@@ -10,7 +10,7 @@ const Footer = () => {
     const fetchFooterData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/getfooters"
+          "https://api.styleunionshop.com/getfooters"
         ); // Adjust the API URL as needed
         setFooterData(response.data[0]); // Assuming you're returning an array with one object
       } catch (error) {

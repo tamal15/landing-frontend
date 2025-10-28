@@ -51,7 +51,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/send-otp`, {
+      const response = await fetch(`https://api.styleunionshop.com/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phoneNumber }),
@@ -84,7 +84,7 @@ const Login = () => {
   // Verify OTP
   const verifyOtp = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/verify-otp`, {
+      const response = await fetch(`https://api.styleunionshop.com/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phoneNumber, otp }),

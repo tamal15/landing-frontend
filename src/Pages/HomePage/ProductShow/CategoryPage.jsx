@@ -27,7 +27,7 @@ const CategoryPage = () => {
     };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/getproducts`)
+    fetch(`https://api.styleunionshop.com/getproducts`)
       .then((response) => response.json())
       .then((data) => {
         const filteredProducts = data

@@ -18,7 +18,7 @@ const EditBlog = () => {
 
   // Fetch about data
   useEffect(() => {
-    fetch(`http://localhost:5000/editblogs/${id}`)
+    fetch(`https://api.styleunionshop.com/editblogs/${id}`)
       .then((res) => res.json())
       .then((data) => setAboutData(data))
       .catch((error) => console.error("Error fetching about data:", error));
@@ -77,7 +77,7 @@ const EditBlog = () => {
     }
 
     // Send the updated data to the server
-    fetch(`http://localhost:5000/blogdataupdate/${id}`, {
+    fetch(`https://api.styleunionshop.com/blogdataupdate/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedAboutData),

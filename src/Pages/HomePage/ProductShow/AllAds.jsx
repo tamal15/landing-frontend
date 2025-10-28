@@ -11,7 +11,7 @@ const AllAds = () => {
   const [cart, setCart] = useContext(CartContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/getproducts")
+    fetch("https://api.styleunionshop.com/getproducts")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.reverse()); // latest products first

@@ -15,7 +15,7 @@ const ProjectHome = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `http://localhost:5000/getprojecthome`
+          `https://api.styleunionshop.com/getprojecthome`
         );
         const result = await response.json();
         setData(result);
@@ -42,7 +42,7 @@ const ProjectHome = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/homeprojectdelete/${id}`)
+          .delete(`https://api.styleunionshop.com/homeprojectdelete/${id}`)
           .then((response) => {
             response.status === 204 &&
               Swal.fire("Deleted!", "Your file has been deleted.", "success");

@@ -18,7 +18,7 @@ const ProductDetails = () => {
 console.log(cart)
   useEffect(() => {
     if (!id) return;
-    fetch(`http://localhost:5000/product/${id}`)
+    fetch(`https://api.styleunionshop.com/product/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setBook(data);
@@ -27,7 +27,7 @@ console.log(cart)
         }
 
         if (data.related) {
-          fetch(`http://localhost:5000/related-products/${data.related}`)
+          fetch(`https://api.styleunionshop.com/related-products/${data.related}`)
             .then((res) => res.json())
             .then((relatedItems) => {
               const filteredRelated = relatedItems.filter((item) => item._id !== data._id);

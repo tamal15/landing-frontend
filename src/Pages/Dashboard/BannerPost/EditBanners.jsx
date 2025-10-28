@@ -13,11 +13,11 @@ const EditBanners = () => {
   });
   const [imageFile, setImageFile] = useState(null);
   const { id } = useParams();
-  const image_upload_api = `http://localhost:5000/upload`;
+  const image_upload_api = `https://api.styleunionshop.com/upload`;
 
   // Fetch banner data
   useEffect(() => {
-    fetch(`http://localhost:5000/editbaners/${id}`)
+    fetch(`https://api.styleunionshop.com/editbaners/${id}`)
       .then((res) => res.json())
       .then((data) => setBanner(data))
       .catch((error) => console.error("Error fetching banner:", error));
@@ -77,7 +77,7 @@ const EditBanners = () => {
     }
 
     // Send updated data
-    fetch(`http://localhost:5000/bannerdataupdate/${id}`, {
+    fetch(`https://api.styleunionshop.com/bannerdataupdate/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedBanner),

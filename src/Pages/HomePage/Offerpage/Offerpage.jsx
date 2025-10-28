@@ -27,7 +27,7 @@ const OfferPage = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/getoffer`)
+    fetch(`https://api.styleunionshop.com/getoffer`)
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));

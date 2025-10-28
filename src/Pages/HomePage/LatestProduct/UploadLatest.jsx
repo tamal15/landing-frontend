@@ -46,7 +46,7 @@ const UploadLatest = () => {
             images,
         };
 
-        fetch("http://localhost:5000/postlatest", {
+        fetch("https://api.styleunionshop.com/postlatest", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(productData),

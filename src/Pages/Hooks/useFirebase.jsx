@@ -48,7 +48,7 @@ const useFirebase = () => {
     setAuthError(""); // Clear previous errors
   
     try {
-      const response = await fetch(`http://localhost:5000/usersblock/${phoneNumber}`);
+      const response = await fetch(`https://api.styleunionshop.com/usersblock/${phoneNumber}`);
   
       if (!response.ok) {
         Swal.fire({
@@ -150,7 +150,7 @@ const useFirebase = () => {
   const sendUser = (email, displayName, phoneNumber, method) => {
     const user = { email, displayName, phoneNumber };
   
-    fetch(`http://localhost:5000/usersdatasd`, {
+    fetch(`https://api.styleunionshop.com/usersdatasd`, {
       method: method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
@@ -170,7 +170,7 @@ const useFirebase = () => {
   // Load admin role from the database
   useEffect(() => {
     if (user?.phoneNumber) {
-      fetch(`http://localhost:5000/userLogin/${user?.phoneNumber}`)
+      fetch(`https://api.styleunionshop.com/userLogin/${user?.phoneNumber}`)
         .then((res) => res.json())
         .then((data) => setAdmin(data?.admin));
     }
@@ -179,7 +179,7 @@ const useFirebase = () => {
   // load the subadmin 
   useEffect(() => {
     if (user?.phoneNumber) {
-      fetch(`http://localhost:5000/userLoginsubadmin/${user?.phoneNumber}`)
+      fetch(`https://api.styleunionshop.com/userLoginsubadmin/${user?.phoneNumber}`)
         .then((res) => res.json())
         .then((data) => setsubAdmin(data?.subadmin));
     }

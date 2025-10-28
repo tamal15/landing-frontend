@@ -11,7 +11,7 @@ const ProductUpload = () => {
     const { register, handleSubmit, reset } = useForm();
     const [images, setImages] = useState([]);
 
-   const image_upload_api = `http://localhost:5000/upload`;
+   const image_upload_api = `https://api.styleunionshop.com/upload`;
 
   const handleImageChange = async (e) => {
   const files = Array.from(e.target.files);
@@ -54,7 +54,7 @@ const ProductUpload = () => {
             facebook:"https://www.facebook.com/share/16ZWJNSrDu/"
         };
 
-        fetch("http://localhost:5000/postProductdata", {
+        fetch("https://api.styleunionshop.com/postProductdata", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(productData),

@@ -17,7 +17,7 @@ const EditAbout = () => {
 
   // Fetch banner data
   useEffect(() => {
-    fetch(`http://localhost:5000/editabouts/${id}`)
+    fetch(`https://api.styleunionshop.com/editabouts/${id}`)
       .then((res) => res.json())
       .then((data) => setBanner(data))
       .catch((error) => console.error("Error fetching banner:", error));
@@ -76,7 +76,7 @@ const EditAbout = () => {
     }
 
     // Send the updated data to the server
-    fetch(`http://localhost:5000/aboutdataupdate/${id}`, {
+    fetch(`https://api.styleunionshop.com/aboutdataupdate/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedBanner),

@@ -30,7 +30,7 @@ const DashboardHome = () => {
   const [approvedCount, setApprovedCount] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:5000/userMy")
+    fetch("https://api.styleunionshop.com/userMy")
       .then(res => res.json())
       .then(data => {
         const pendingOrders = data.filter(order => order.status === "Pending");

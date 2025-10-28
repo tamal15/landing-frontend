@@ -12,7 +12,7 @@ const UpdateOrder = () => {
     const ordersPerPage = 6; // Number of orders per page
 
     useEffect(() => {
-        fetch(`http://localhost:5000/userMy`)
+        fetch(`https://api.styleunionshop.com/userMy`)
             .then(res => res.json())
             .then(data => {
                 const pendingOrders = data.filter(order => order.status === "Pending");
@@ -32,7 +32,7 @@ const UpdateOrder = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/manageAllOrderDelete/${id}`)
+                axios.delete(`https://api.styleunionshop.com/manageAllOrderDelete/${id}`)
                     .then(() => {
                         setOrder(ordering.filter((order) => order._id !== id));
                         Swal.fire('Deleted!', 'Order has been deleted.', 'success');

@@ -10,7 +10,7 @@ const GetAbout = () => {
   // Fetch about data
   useEffect(() => {
     axios
-      .get("http://localhost:5000/aboutparts")
+      .get("https://api.styleunionshop.com/aboutparts")
       .then((response) => {
         if (Array.isArray(response.data) && response.data.length > 0) {
           setAboutData(response.data[0]); // Assuming single entry

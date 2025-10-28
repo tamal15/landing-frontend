@@ -18,10 +18,10 @@ const EditProduct = () => {
 
   const [imageFiles, setImageFiles] = useState([]);
   const { id } = useParams();
-  const image_upload_api = `http://localhost:5000/upload`;
+  const image_upload_api = `https://api.styleunionshop.com/upload`;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/editproductdata/${id}`)
+    fetch(`https://api.styleunionshop.com/editproductdata/${id}`)
       .then((res) => res.json())
       .then((data) => setBanner(data))
       .catch((error) => console.error("Error fetching product:", error));
@@ -68,7 +68,7 @@ const EditProduct = () => {
         updatedBanner.images = [...banner.images, ...uploadedUrls];
       }
 
-      const res = await fetch(`http://localhost:5000/productdataupdate/${id}`, {
+      const res = await fetch(`https://api.styleunionshop.com/productdataupdate/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedBanner),

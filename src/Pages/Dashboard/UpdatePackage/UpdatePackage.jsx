@@ -9,7 +9,7 @@ const UpdatePackage = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5000/api/newproductss`); // Adjust endpoint
+      const response = await axios.get(`https://api.styleunionshop.com/api/newproductss`); // Adjust endpoint
       const filteredProducts = response.data.filter((product) =>
         ["Top Adds", "Bump Ups", "Urgents"].includes(product.boostingDetails?.packageName)
       );
@@ -25,7 +25,7 @@ const UpdatePackage = () => {
     try {
       const updatedPackage = { packageName: newPackageName };
       const response = await axios.put(
-        `http://localhost:5000/api/products/update-package/${productId}`,
+        `https://api.styleunionshop.com/api/products/update-package/${productId}`,
         updatedPackage
       );
 

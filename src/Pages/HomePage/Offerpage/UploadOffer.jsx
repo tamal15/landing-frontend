@@ -46,7 +46,7 @@ const UploadOffer = () => {
             images,
         };
 
-        fetch("http://localhost:5000/offerpost", {
+        fetch("https://api.styleunionshop.com/offerpost", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(productData),

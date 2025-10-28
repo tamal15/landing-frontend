@@ -26,7 +26,7 @@ const ProductShow = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/getproducts")
+    fetch("https://api.styleunionshop.com/getproducts")
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));

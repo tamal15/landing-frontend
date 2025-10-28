@@ -14,7 +14,7 @@ const GetProduct = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `http://localhost:5000/getproducts`
+          `https://api.styleunionshop.com/getproducts`
         );
         const result = await response.json();
         setData(result);
@@ -41,7 +41,7 @@ const GetProduct = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/productdatadelete/${id}`)
+          .delete(`https://api.styleunionshop.com/productdatadelete/${id}`)
           .then((response) => {
             response.status === 204 &&
               Swal.fire("Deleted!", "Your file has been deleted.", "success");

@@ -6,7 +6,7 @@ const CustomerAddress = ({ order, handleDelete }) => {
 //   const [courierId, setCourierId] = useState(order?.courier_id || "");
 
   const handleUpdate = (id) => {
-    fetch(`http://localhost:5000/updateStatus/${id}`, {
+    fetch(`https://api.styleunionshop.com/updateStatus/${id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ status }),
@@ -17,7 +17,7 @@ const CustomerAddress = ({ order, handleDelete }) => {
   };
 
 //   const handleUpdates = (id) => {
-//     fetch(`http://localhost:5000/updateCourier/${id}`, {
+//     fetch(`https://api.styleunionshop.com/updateCourier/${id}`, {
 //       method: "PUT",
 //       headers: { "content-type": "application/json" },
 //       body: JSON.stringify({ courier_id: courierId }),

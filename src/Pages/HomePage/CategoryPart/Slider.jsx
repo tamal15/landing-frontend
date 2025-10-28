@@ -9,7 +9,7 @@ console.log(data)
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:5000/getbannerdata`);
+        const response = await fetch(`https://api.styleunionshop.com/getbannerdata`);
         const result = await response.json();
         setData(result);
       } catch (error) {
